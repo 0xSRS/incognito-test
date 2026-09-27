@@ -104,6 +104,15 @@ incognito-5.0/
 
 ## 📝 Living Changelog & Context History
 
+### [2026-09-27] — CTF Treasure Hunt Backend & Archival Pipeline
+- **Dynamic Flag Route & Database**:
+  - Added PostgreSQL client integration via `src/lib/db.ts` with connection pooling and `globalThis` dev caching.
+  - Implemented dynamic route `src/app/[slug]/page.tsx` querying active flags for participant directory URLs (`incogito05.tech/<slug>`).
+  - Added themed 404 handler `src/app/not-found.tsx` with noir styling and cryptic Wayback Machine hint.
+  - Defined SQL schema `schema.sql` (`users`, `user_flags`, `user_gets`, `pastes`).
+- **Archival Pipeline**:
+  - Added `backend/scripts/archive_and_deactivate.py` supporting both anonymous Save Page Now and authenticated SPN2 API to archive live pages to Wayback Machine, verify flag contents, and deactivate rows in DB.
+
 ### [2026-09-24] — Mobile Frame Removal & Dark Overscroll
 - **Mobile Viewport Optimization**:
   - Hid `.ornate-frame` on mobile devices (`<= 768px`) via CSS `display: none !important` and updated `OrnateFrame.tsx` to omit scroll/resize handlers on mobile screens.

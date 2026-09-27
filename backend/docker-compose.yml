@@ -1,0 +1,17 @@
+services:
+  db:
+    image: postgres:16
+    container_name: freshers_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: q7w8e9a4s5d6z1x2c3@123
+      POSTGRES_DB: freshers_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  pgdata:
