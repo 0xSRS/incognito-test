@@ -18,7 +18,7 @@ DB_CONFIG = dict(
     password="q7w8e9a4s5d6z1x2c3@123",
 )
 
-JWT_SECRET = "mitulpagalhai"  
+JWT_SECRET = "G8ldUZqifwoNXshgRzlNjDwkSFyWA1bQW1lu33wL9U0"  
 
 attempts = defaultdict(list)
 MAX_ATTEMPTS = 5
