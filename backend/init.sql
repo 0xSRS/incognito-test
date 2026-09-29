@@ -27,3 +27,14 @@ CREATE TABLE pastes (
     encoding_type TEXT,
     pastebin_url TEXT
 );
+
+ALTER TABLE user_flags ADD COLUMN is_used BOOLEAN NOT NULL DEFAULT FALSE;
+
+CREATE TABLE tickets (
+    ticket_id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(user_id),
+    flag_id INTEGER NOT NULL REFERENCES user_flags(flag_id),
+    jwt_token TEXT NOT NULL,
+    qr_path TEXT,
+    issued_at TIMESTAMP NOT NULL DEFAULT NOW()
+);
