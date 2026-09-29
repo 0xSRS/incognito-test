@@ -16,7 +16,8 @@ CREATE TABLE user_flags (
     flag_id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL REFERENCES users(user_id),
     flag TEXT NOT NULL,
-    flag_hash TEXT
+    flag_hash TEXT,
+    is_used BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE pastes (
@@ -28,7 +29,6 @@ CREATE TABLE pastes (
     pastebin_url TEXT
 );
 
-ALTER TABLE user_flags ADD COLUMN is_used BOOLEAN NOT NULL DEFAULT FALSE;
 
 CREATE TABLE tickets (
     ticket_id SERIAL PRIMARY KEY,
@@ -36,5 +36,6 @@ CREATE TABLE tickets (
     flag_id INTEGER NOT NULL REFERENCES user_flags(flag_id),
     jwt_token TEXT NOT NULL,
     qr_path TEXT,
+    is_used BOOLEAN NOT NULL DEFAULT FALSE,
     issued_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
