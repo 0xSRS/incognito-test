@@ -1,7 +1,7 @@
 import datetime
 import time
 from collections import defaultdict
-
+import os
 import jwt
 import psycopg2
 from fastapi import FastAPI, HTTPException, Request, BackgroundTasks
@@ -17,8 +17,10 @@ DB_CONFIG = dict(
     user="admin",
     password="q7w8e9a4s5d6z1x2c3@123",
 )
+JWT_SECRET = os.getenv("JWT_SECRET")
+if not JWT_SECRET:
+    raise RuntimeError("JWT_SECRET environment variable is not set. Set it before starting the server.")
 
-JWT_SECRET = "G8ldUZqifwoNXshgRzlNjDwkSFyWA1bQW1lu33wL9U0"  
 
 attempts = defaultdict(list)
 MAX_ATTEMPTS = 5
@@ -89,7 +91,7 @@ async def validate_flag(payload: FlagSubmission, request: Request, background_ta
         {
             "email": email,
             "iat": datetime.datetime.utcnow(),
-            "exp": datetime.datetime.utcnow() + datetime.timedelta(days=2),
+            "exp": datetime.datetime.utcnow() + datetime.timedelta(days=8),
         },
         JWT_SECRET,
         algorithm="HS256",
